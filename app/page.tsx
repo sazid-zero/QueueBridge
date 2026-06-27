@@ -131,16 +131,17 @@ export default function HomePage() {
         </p>
         <div className="relative">
           {/* Gradient Masks */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-neutral-50 to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-neutral-50 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10" />
 
-          {/* Marquee Track */}
-          <div className="flex animate-marquee">
-            {[...Array(2)].map((_, setIndex) => (
-              <div key={setIndex} className="flex items-center gap-12 md:gap-16 px-6">
-                {['City Health', 'Metro Services', 'QuickCare', 'OfficeHub', 'FastTrack'].map((brand, i) => (
-                  <span key={`${setIndex}-${i}`} className="text-sm font-medium text-neutral-300 whitespace-nowrap">
-                    {brand}
+          {/* Marquee Track — 4 sets, translate -50% = 2 full sets = seamless */}
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, setIndex) => (
+              <div key={setIndex} className="flex items-center" aria-hidden={setIndex > 0}>
+                {['City Health', 'Metro Services', 'QuickCare', 'OfficeHub', 'FastTrack', 'MediCore', 'CivicPlus', 'SwiftLine'].map((brand, i) => (
+                  <span key={`${setIndex}-${i}`} className="inline-flex items-center gap-10 px-10">
+                    <span className="text-sm font-medium text-neutral-300 whitespace-nowrap">{brand}</span>
+                    <span className="w-1 h-1 rounded-full bg-neutral-200 shrink-0" />
                   </span>
                 ))}
               </div>
