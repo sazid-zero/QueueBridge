@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # - DATABASE_URL=${DATABASE_URL}
+      # - REDIS_URL=${REDIS_URL}
+      # - REDIS_TOKEN=${REDIS_TOKEN}
+    env_file:
+      - .env
+    restart: unless-stopped
