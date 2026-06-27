@@ -124,17 +124,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className="py-12 border-y border-neutral-100 bg-neutral-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-center text-xs font-medium text-neutral-400 uppercase tracking-widest mb-6">
-            Trusted by modern offices
-          </p>
-          <div className="flex items-center justify-center gap-12 md:gap-16">
-            {['City Health', 'Metro Services', 'QuickCare', 'OfficeHub', 'FastTrack'].map((brand) => (
-              <span key={brand} className="text-sm font-medium text-neutral-300 hover:text-neutral-500 transition-colors cursor-default">
-                {brand}
-              </span>
+      {/* Trust Marquee */}
+      <section className="py-12 border-y border-neutral-100 bg-neutral-50 overflow-hidden">
+        <p className="text-center text-xs font-medium text-neutral-400 uppercase tracking-widest mb-6">
+          Trusted by modern offices
+        </p>
+        <div className="relative">
+          {/* Gradient Masks */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-neutral-50 to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-neutral-50 to-transparent z-10" />
+
+          {/* Marquee Track */}
+          <div className="flex animate-marquee">
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex items-center gap-12 md:gap-16 px-6">
+                {['City Health', 'Metro Services', 'QuickCare', 'OfficeHub', 'FastTrack'].map((brand, i) => (
+                  <span key={`${setIndex}-${i}`} className="text-sm font-medium text-neutral-300 whitespace-nowrap">
+                    {brand}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
         </div>
