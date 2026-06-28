@@ -496,27 +496,39 @@ export default function HomePage() {
           </FadeUp>
 
           <div className="grid md:grid-cols-3 gap-4">
-            {/* Large dark card */}
+
+            {/* ── DISPLAY BOARD — dark card, overlapping screen rectangles ── */}
             <FadeUp className="md:col-span-2" delay={0}>
               <div
-                className="text-white rounded-2xl p-8 md:p-10 group hover:brightness-110 transition-all duration-300 min-h-[280px] flex flex-col justify-between relative overflow-hidden"
+                className="text-white rounded-2xl p-8 md:p-10 group hover:brightness-110 transition-all duration-300 min-h-[300px] flex flex-col justify-between relative overflow-hidden"
                 style={{
                   background: 'linear-gradient(135deg, #0a0a0a 0%, #171717 60%, #0d2016 100%)',
                   boxShadow: '0 16px 48px -12px rgba(0,0,0,0.30), 0 4px 12px -4px rgba(0,0,0,0.18)',
                 }}
               >
-                {/* Dot grid on dark card */}
+                {/* Abstract shape — stacked display screens (rectangles at angles) */}
+                <svg className="absolute right-0 bottom-0 pointer-events-none" width="220" height="200" viewBox="0 0 220 200" fill="none" aria-hidden="true">
+                  {/* back screen */}
+                  <rect x="60" y="30" width="130" height="90" rx="10" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" transform="rotate(-8 125 75)" />
+                  {/* mid screen */}
+                  <rect x="40" y="55" width="130" height="90" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)" strokeWidth="1.5" transform="rotate(-4 105 100)" />
+                  {/* front screen — emerald tint */}
+                  <rect x="20" y="80" width="130" height="90" rx="10" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" strokeWidth="1.5" />
+                  {/* screen content lines */}
+                  <rect x="36" y="102" width="60" height="5" rx="2.5" fill="rgba(16,185,129,0.4)" />
+                  <rect x="36" y="114" width="40" height="4" rx="2" fill="rgba(255,255,255,0.12)" />
+                  <rect x="36" y="124" width="50" height="4" rx="2" fill="rgba(255,255,255,0.08)" />
+                  {/* token number suggestion */}
+                  <rect x="36" y="138" width="32" height="20" rx="4" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.3)" strokeWidth="1" />
+                </svg>
+                {/* Dot grid overlay */}
                 <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none" style={{ ...DOT_GRID, opacity: 0.07 }} />
-                {/* Hover glow pulse */}
-                <div className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
-                  background: 'radial-gradient(ellipse 60% 60% at 80% 20%, rgba(16,185,129,0.12) 0%, transparent 70%)',
-                }} />
                 <div className="relative">
                   <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400 uppercase tracking-wider mb-6">
                     <Monitor className="w-3.5 h-3.5" />Display Board
                   </div>
                   <h3 className="text-2xl md:text-3xl font-medium tracking-tight mb-3">Put up a display. Done.</h3>
-                  <p className="text-neutral-400 max-w-md leading-relaxed">
+                  <p className="text-neutral-400 max-w-sm leading-relaxed">
                     A beautiful, auto-updating display board for your waiting area.
                     Shows who's being served, estimated wait times, and keeps everyone informed.
                   </p>
@@ -527,17 +539,26 @@ export default function HomePage() {
               </div>
             </FadeUp>
 
-            {/* Emerald booking card */}
+            {/* ── BOOKING — emerald card, concentric arcs (token ticket shape) ── */}
             <FadeUp delay={80}>
               <div
-                className="rounded-2xl p-8 min-h-[280px] flex flex-col justify-between group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="rounded-2xl p-8 min-h-[300px] flex flex-col justify-between group hover:shadow-lg transition-all duration-300 cursor-pointer relative overflow-hidden"
                 style={{
                   background: 'linear-gradient(145deg, #f0fdf6 0%, #dcfce7 100%)',
                   border: '1px solid #bbf7d0',
                   boxShadow: '0 4px 20px -4px rgba(16,185,129,0.18), 0 1px 4px -1px rgba(16,185,129,0.10)',
                 }}
               >
-                <div>
+                {/* Abstract shape — concentric quarter-circles (ticket/token) */}
+                <svg className="absolute right-0 bottom-0 pointer-events-none" width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+                  <circle cx="150" cy="150" r="55" fill="none" stroke="rgba(16,185,129,0.18)" strokeWidth="1.5" />
+                  <circle cx="150" cy="150" r="80" fill="none" stroke="rgba(16,185,129,0.12)" strokeWidth="1.5" />
+                  <circle cx="150" cy="150" r="108" fill="none" stroke="rgba(16,185,129,0.07)" strokeWidth="1.5" />
+                  <circle cx="150" cy="150" r="135" fill="none" stroke="rgba(16,185,129,0.04)" strokeWidth="1.5" />
+                  {/* solid inner filled circle */}
+                  <circle cx="150" cy="150" r="30" fill="rgba(16,185,129,0.15)" />
+                </svg>
+                <div className="relative">
                   <div className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider mb-6" style={{ color: '#059669' }}>
                     <Users className="w-3.5 h-3.5" />Booking
                   </div>
@@ -546,58 +567,95 @@ export default function HomePage() {
                     Citizens book in under a minute. Get a unique token, track position in real-time.
                   </p>
                 </div>
-                <Link href="/citizen" className="inline-flex items-center gap-2 text-sm font-medium transition-colors group-hover:gap-3 mt-6" style={{ color: '#059669' }}>
+                <Link href="/citizen" className="relative inline-flex items-center gap-2 text-sm font-medium transition-colors group-hover:gap-3 mt-6" style={{ color: '#059669' }}>
                   Try booking <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </FadeUp>
 
-            {/* Three small feature cards */}
-            {[
-              {
-                icon: <Zap className="w-3.5 h-3.5" />, label: 'Real-time', title: 'Instant updates',
-                desc: 'WebSocket-powered live tracking. Know immediately when it\'s your turn.',
-                badge: (
+            {/* ── REAL-TIME — ripple/wave rings ── */}
+            <FadeUp delay={0}>
+              <div
+                className="rounded-2xl p-8 min-h-[220px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 group relative overflow-hidden"
+                style={{ background: '#f8fafc', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px -2px rgba(0,0,0,0.07)' }}
+              >
+                {/* Abstract shape — signal ripple (wifi/broadcast rings) */}
+                <svg className="absolute right-0 bottom-0 pointer-events-none" width="120" height="110" viewBox="0 0 120 110" fill="none" aria-hidden="true">
+                  <circle cx="110" cy="100" r="30" fill="none" stroke="#d1d5db" strokeWidth="1.5" />
+                  <circle cx="110" cy="100" r="50" fill="none" stroke="#e5e7eb" strokeWidth="1.5" />
+                  <circle cx="110" cy="100" r="72" fill="none" stroke="#f3f4f6" strokeWidth="1.5" />
+                  <circle cx="110" cy="100" r="12" fill="#e5e7eb" />
+                  <circle cx="110" cy="100" r="5" fill="#9ca3af" />
+                </svg>
+                <div className="relative">
+                  <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-500 uppercase tracking-wider mb-4"><Zap className="w-3.5 h-3.5" />Real-time</div>
+                  <h3 className="text-lg font-medium tracking-tight mb-2">Instant updates</h3>
+                  <p className="text-neutral-500 text-sm leading-relaxed">WebSocket-powered live tracking. Know immediately when it's your turn.</p>
+                </div>
+                <div className="mt-6">
                   <div className="inline-flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-neutral-200 w-fit">
                     <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#10b981' }} />
                     <span className="text-xs font-mono text-neutral-600">&lt; 200ms latency</span>
                   </div>
-                ),
-              },
-              {
-                icon: <Clock className="w-3.5 h-3.5" />, label: 'ETA Estimates', title: 'Accurate wait times',
-                desc: 'Smart algorithms calculate wait times based on actual service duration.',
-                badge: <div className="flex items-baseline gap-1"><span className="text-3xl font-semibold font-mono text-neutral-800">~8</span><span className="text-sm text-neutral-400">min avg error</span></div>,
-              },
-              {
-                icon: <Shield className="w-3.5 h-3.5" />, label: 'Secure', title: 'Data safe',
-                desc: 'End-to-end encryption, secure tokens, and privacy-first design.',
-                badge: (
+                </div>
+              </div>
+            </FadeUp>
+
+            {/* ── ETA — hourglass / flowing diamond shapes ── */}
+            <FadeUp delay={80}>
+              <div
+                className="rounded-2xl p-8 min-h-[220px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 group relative overflow-hidden"
+                style={{ background: '#f8fafc', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px -2px rgba(0,0,0,0.07)' }}
+              >
+                {/* Abstract shape — stacked rotated squares (hourglass/time) */}
+                <svg className="absolute right-0 bottom-0 pointer-events-none" width="120" height="110" viewBox="0 0 120 110" fill="none" aria-hidden="true">
+                  <rect x="68" y="48" width="44" height="44" rx="8" fill="#f3f4f6" stroke="#e5e7eb" strokeWidth="1.5" transform="rotate(20 90 70)" />
+                  <rect x="80" y="58" width="44" height="44" rx="8" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1.5" transform="rotate(20 102 80)" />
+                  <rect x="92" y="68" width="44" height="44" rx="8" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1" transform="rotate(20 114 90)" />
+                </svg>
+                <div className="relative">
+                  <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-500 uppercase tracking-wider mb-4"><Clock className="w-3.5 h-3.5" />ETA Estimates</div>
+                  <h3 className="text-lg font-medium tracking-tight mb-2">Accurate wait times</h3>
+                  <p className="text-neutral-500 text-sm leading-relaxed">Smart algorithms calculate wait times based on actual service duration.</p>
+                </div>
+                <div className="mt-6 flex items-baseline gap-1">
+                  <span className="text-3xl font-semibold font-mono text-neutral-800">~8</span>
+                  <span className="text-sm text-neutral-400">min avg error</span>
+                </div>
+              </div>
+            </FadeUp>
+
+            {/* ── SECURE — interlocking shield/lock hexagons ── */}
+            <FadeUp delay={160}>
+              <div
+                className="rounded-2xl p-8 min-h-[220px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 group relative overflow-hidden"
+                style={{ background: '#f8fafc', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px -2px rgba(0,0,0,0.07)' }}
+              >
+                {/* Abstract shape — overlapping hexagons (security/honeycomb) */}
+                <svg className="absolute right-0 bottom-0 pointer-events-none" width="130" height="120" viewBox="0 0 130 120" fill="none" aria-hidden="true">
+                  {/* hex 1 */}
+                  <polygon points="95,10 115,22 115,46 95,58 75,46 75,22" fill="#f3f4f6" stroke="#e5e7eb" strokeWidth="1.5" />
+                  {/* hex 2 — shifted down-left */}
+                  <polygon points="75,42 95,54 95,78 75,90 55,78 55,54" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1.5" />
+                  {/* hex 3 — shifted down-right */}
+                  <polygon points="115,42 135,54 135,78 115,90 95,78 95,54" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1.5" />
+                  {/* center dot */}
+                  <circle cx="95" cy="66" r="5" fill="#9ca3af" />
+                </svg>
+                <div className="relative">
+                  <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-500 uppercase tracking-wider mb-4"><Shield className="w-3.5 h-3.5" />Secure</div>
+                  <h3 className="text-lg font-medium tracking-tight mb-2">Data safe</h3>
+                  <p className="text-neutral-500 text-sm leading-relaxed">End-to-end encryption, secure tokens, and privacy-first design.</p>
+                </div>
+                <div className="mt-6">
                   <div className="inline-flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-neutral-200 w-fit">
                     <Shield className="w-3.5 h-3.5" style={{ color: '#10b981' }} />
                     <span className="text-xs font-medium text-neutral-600">99.9% uptime SLA</span>
                   </div>
-                ),
-              },
-            ].map((f, i) => (
-              <FadeUp key={i} delay={i * 80}>
-                <div
-                  className="rounded-2xl p-8 min-h-[200px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 group"
-                  style={{
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    boxShadow: '0 2px 8px -2px rgba(0,0,0,0.07)',
-                  }}
-                >
-                  <div>
-                    <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-500 uppercase tracking-wider mb-4">{f.icon}{f.label}</div>
-                    <h3 className="text-lg font-medium tracking-tight mb-2">{f.title}</h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed">{f.desc}</p>
-                  </div>
-                  <div className="mt-6">{f.badge}</div>
                 </div>
-              </FadeUp>
-            ))}
+              </div>
+            </FadeUp>
+
           </div>
         </div>
       </section>
